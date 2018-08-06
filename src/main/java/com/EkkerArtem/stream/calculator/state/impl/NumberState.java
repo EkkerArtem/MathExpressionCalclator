@@ -3,10 +3,9 @@ package com.EkkerArtem.stream.calculator.state.impl;
 import com.EkkerArtem.stream.calculator.state.State;
 
 public class NumberState implements State {
-
     @Override
     public int performOperation(Integer... args) {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -25,7 +24,28 @@ public class NumberState implements State {
     }
 
     @Override
+    public State getNextState(String expr) {
+        switch (expr){
+            case "+":{
+                return new Addition();
+            }
+            case "-":{
+                return new Subtraction();
+            }
+            case "*": {
+                return new Multiplication();
+            }
+            case "/": {
+                return new Division();
+            }
+            default:{
+                throw new IllegalArgumentException("Invalid state \'" + expr + "\' after number state");
+            }
+        }
+    }
+
+    @Override
     public int compareTo(State o) {
-        return 0;
+        return Integer.compare(getPriority(), o.getPriority());
     }
 }

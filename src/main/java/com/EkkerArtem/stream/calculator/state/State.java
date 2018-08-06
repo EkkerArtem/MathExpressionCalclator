@@ -26,5 +26,7 @@ public interface State extends Comparable<State>{
      * @return priority of the state
      */
     int getPriority();
+
+    State getNextState(String expr);
 }
 

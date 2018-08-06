@@ -4,11 +4,7 @@ import com.EkkerArtem.stream.calculator.StreamCalculator;
 import com.EkkerArtem.stream.calculator.parser.Parser;
 import com.EkkerArtem.stream.calculator.parser.impl.ParserImpl;
 import com.EkkerArtem.stream.calculator.state.State;
-import com.EkkerArtem.stream.calculator.state.StateFactory;
-import com.EkkerArtem.stream.calculator.state.impl.Addition;
-import com.EkkerArtem.stream.calculator.state.impl.Division;
-import com.EkkerArtem.stream.calculator.state.impl.Multiplication;
-import com.EkkerArtem.stream.calculator.state.impl.Subtraction;
+import com.EkkerArtem.stream.calculator.state.impl.*;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.Stack;
@@ -18,9 +14,8 @@ public class StreamCalculatorImpl implements StreamCalculator {
      * Todo add current states support and transition matrix support
      * to validate switch between states
      *
-    */
-    //State currentState;
-
+     */
+    private State currentState = new Initial();
     private final Parser parser = new ParserImpl();
     private Stack<State> operatorsStack;
     private Stack<Integer> operandsStack;
@@ -45,15 +40,12 @@ public class StreamCalculatorImpl implements StreamCalculator {
      */
     private void cascadeOperations(){
         while (!operatorsStack.empty()) {
-            //Todo add unary operations support
-            State stackOperation = operatorsStack.peek();
-            stackOperation = operatorsStack.peek();
-            Integer number2 = operandsStack.pop();
-            Integer number1 = operandsStack.pop();
-
-            int result = stackOperation.performOperation(number1, number2);
-
-            operandsStack.push(result);
+            State stackState = operatorsStack.peek();
+            Integer[] args = new Integer[stackState.getArgsAmount()];
+            for (int i = 0; i < stackState.getArgsAmount(); i++) {
+                args[i] = operandsStack.pop();
+            }
+            operandsStack.push(stackState.performOperation(args));
 
             operatorsStack.pop();
         }
@@ -65,20 +57,20 @@ public class StreamCalculatorImpl implements StreamCalculator {
      * @param operationStr string which contains string representation of the operation
      */
     private void prioritizeOperation(String operationStr){
-        State currentOperation = StateFactory.getState(operationStr);
+        currentState = currentState.getNextState(operationStr);
         if(!operatorsStack.empty()){
             State stackOperation = operatorsStack.peek();
-            if(stackOperation.compareTo(currentOperation) == 0){
+            if(stackOperation.compareTo(currentState) == 0){
                 cascadeOperations();
-                operatorsStack.push(currentOperation);
-            }else if(stackOperation.compareTo(currentOperation) > 0){
-                operatorsStack.push(currentOperation);
-            }else if(stackOperation.compareTo(currentOperation) < 0){
+                operatorsStack.push(currentState);
+            }else if(stackOperation.compareTo(currentState) > 0){
+                operatorsStack.push(currentState);
+            }else if(stackOperation.compareTo(currentState) < 0){
                 cascadeOperations();
-                operatorsStack.push(currentOperation);
+                operatorsStack.push(currentState);
             }
         }else {
-            operatorsStack.push(currentOperation);
+            operatorsStack.push(currentState);
         }
     }
 
@@ -91,6 +83,7 @@ public class StreamCalculatorImpl implements StreamCalculator {
         while (parser.hasNext()){
             String token = parser.nextToken();
             if(NumberUtils.isNumber(token)){
+                currentState = currentState.getNextState(token);
                 operandsStack.push(Integer.parseInt(token));
             }else if(token != null && !token.equals("")) {
                 prioritizeOperation(token);
@@ -99,6 +92,7 @@ public class StreamCalculatorImpl implements StreamCalculator {
         }
 
         cascadeOperations();
+        currentState = new Initial();
 
         return operandsStack.pop();
     }
