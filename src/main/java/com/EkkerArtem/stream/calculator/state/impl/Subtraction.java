@@ -1,7 +1,6 @@
 package com.EkkerArtem.stream.calculator.state.impl;
 
 import com.EkkerArtem.stream.calculator.state.State;
-import org.apache.commons.lang3.math.NumberUtils;
 
 public class Subtraction extends BinaryOperation {
     private final int priority = 4;
