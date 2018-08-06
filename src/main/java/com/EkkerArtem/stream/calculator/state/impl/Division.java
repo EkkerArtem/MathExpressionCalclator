@@ -20,7 +20,7 @@ public class Division implements State {
 
     @Override
     public int performOperation(Integer... args) {
-        return args[1] / args[0];
+        return args[0] / args[1];
     }
 
     @Override

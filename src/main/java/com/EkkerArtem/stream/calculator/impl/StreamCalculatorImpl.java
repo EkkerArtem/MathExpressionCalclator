@@ -13,7 +13,6 @@ public class StreamCalculatorImpl implements StreamCalculator {
     /**
      * Todo add current states support and transition matrix support
      * to validate switch between states
-     *
      */
     private State currentState = new Initial();
     private final Parser parser = new ParserImpl();
@@ -25,24 +24,25 @@ public class StreamCalculatorImpl implements StreamCalculator {
     /**
      * Add basic arithmetic operations: addition, subtraction, multiplication, division
      */
-    private void addBasicArithmeticOperations(){
+    private void addBasicArithmeticOperations() {
         parser.addOperator(new Addition());
         parser.addOperator(new Subtraction());
         parser.addOperator(new Multiplication());
         parser.addOperator(new Division());
     }
-    public StreamCalculatorImpl(){
+
+    public StreamCalculatorImpl() {
         addBasicArithmeticOperations();
     }
 
     /**
      * Processes all stored operations.
      */
-    private void cascadeOperations(){
+    private void cascadeOperations() {
         while (!operatorsStack.empty()) {
             State stackState = operatorsStack.peek();
             Integer[] args = new Integer[stackState.getArgsAmount()];
-            for (int i = 0; i < stackState.getArgsAmount(); i++) {
+            for (int i = stackState.getArgsAmount() - 1; i >= 0; i--) {
                 args[i] = operandsStack.pop();
             }
             operandsStack.push(stackState.performOperation(args));
@@ -56,20 +56,20 @@ public class StreamCalculatorImpl implements StreamCalculator {
      *
      * @param operationStr string which contains string representation of the operation
      */
-    private void prioritizeOperation(String operationStr){
+    private void prioritizeOperation(String operationStr) {
         currentState = currentState.getNextState(operationStr);
-        if(!operatorsStack.empty()){
+        if (!operatorsStack.empty()) {
             State stackOperation = operatorsStack.peek();
-            if(stackOperation.compareTo(currentState) == 0){
+            if (stackOperation.compareTo(currentState) == 0) {
                 cascadeOperations();
                 operatorsStack.push(currentState);
-            }else if(stackOperation.compareTo(currentState) > 0){
+            } else if (stackOperation.compareTo(currentState) > 0) {
                 operatorsStack.push(currentState);
-            }else if(stackOperation.compareTo(currentState) < 0){
+            } else if (stackOperation.compareTo(currentState) < 0) {
                 cascadeOperations();
                 operatorsStack.push(currentState);
             }
-        }else {
+        } else {
             operatorsStack.push(currentState);
         }
     }
@@ -80,12 +80,12 @@ public class StreamCalculatorImpl implements StreamCalculator {
         operandsStack = new Stack<>();
 
         parser.setInput(input);
-        while (parser.hasNext()){
+        while (parser.hasNext()) {
             String token = parser.nextToken();
-            if(NumberUtils.isNumber(token)){
+            if (NumberUtils.isNumber(token)) {
                 currentState = currentState.getNextState(token);
                 operandsStack.push(Integer.parseInt(token));
-            }else if(token != null && !token.equals("")) {
+            } else if (token != null && !token.equals("")) {
                 prioritizeOperation(token);
             }
 
