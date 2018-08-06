@@ -8,9 +8,11 @@ import com.EkkerArtem.stream.calculator.state.State;
 public interface Parser {
     /**
      * Adds support of new operand
+     *
      * @param operand
      */
     void addOperator(State operand);
+
     void setInput(String input);
 
     /**

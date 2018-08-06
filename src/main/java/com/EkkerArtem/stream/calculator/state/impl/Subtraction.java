@@ -3,7 +3,7 @@ package com.EkkerArtem.stream.calculator.state.impl;
 import com.EkkerArtem.stream.calculator.state.State;
 import org.apache.commons.lang3.math.NumberUtils;
 
-public class Subtraction implements State {
+public class Subtraction extends BinaryOperation {
     private final int priority = 4;
     private static final int argumentsAmount = 2;
     private String tokenName = "-";
@@ -18,6 +18,12 @@ public class Subtraction implements State {
         return tokenName;
     }
 
+    /**
+     * Performs an binary state with two numbers.
+     *
+     * @param args array of arguments
+     * @return result of subtraction between two numbers
+     */
     @Override
     public int performOperation(Integer... args) {
         return args[0] - args[1];
@@ -29,19 +35,8 @@ public class Subtraction implements State {
     }
 
     @Override
-    public State getNextState(String expr) {
-        if (NumberUtils.isNumber(expr)) {
-            return new NumberState();
-        } else if (expr.equals(String.valueOf('('))) {
-            return new CloseParenthesis();
-        } else if (expr.equals(String.valueOf(')'))) {
-            return new OpenParenthesis();
-        }
-        throw new IllegalArgumentException("Invalid state \'" + expr + "\' after Multiplication state");
-    }
-
-    @Override
-    public int compareTo(State o) {
-        return Integer.compare(priority, o.getPriority());
+    public int compareTo(State state) {
+        return Integer.compare(priority, state.getPriority());
     }
 }
+

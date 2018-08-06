@@ -4,7 +4,7 @@ package com.EkkerArtem.stream.calculator.state;
 /**
  * Stores an algorithm which performs operations.
  */
-public interface State extends Comparable<State>{
+public interface State extends Comparable<State> {
     /**
      * Performs an binary state with two numbers.
      *
@@ -22,6 +22,7 @@ public interface State extends Comparable<State>{
      * @return string command necessary to call the operation
      */
     String getStateName();
+
     /**
      * @return priority of the state
      */

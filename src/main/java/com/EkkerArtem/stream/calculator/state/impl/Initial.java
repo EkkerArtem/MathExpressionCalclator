@@ -33,7 +33,7 @@ public class Initial implements State {
     }
 
     @Override
-    public int compareTo(State o) {
+    public int compareTo(State state) {
         return 0;
     }
 }

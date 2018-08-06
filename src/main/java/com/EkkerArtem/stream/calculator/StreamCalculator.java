@@ -1,7 +1,12 @@
 package com.EkkerArtem.stream.calculator;
 
-//Todo add javadoc
+/**
+ * Returns the result of calculation.
+ */
 public interface StreamCalculator {
-    //todo add javadoc
+    /**
+     * @param input is the input expression.
+     * @return the calculated answer.
+     */
     Integer interpret(String input);
 }

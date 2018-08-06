@@ -25,11 +25,11 @@ public class NumberState implements State {
 
     @Override
     public State getNextState(String expr) {
-        switch (expr){
-            case "+":{
+        switch (expr) {
+            case "+": {
                 return new Addition();
             }
-            case "-":{
+            case "-": {
                 return new Subtraction();
             }
             case "*": {
@@ -44,14 +44,14 @@ public class NumberState implements State {
             case ")": {
                 return new CloseParenthesis();
             }
-            default:{
+            default: {
                 throw new IllegalArgumentException("Invalid state \'" + expr + "\' after number state");
             }
         }
     }
 
     @Override
-    public int compareTo(State o) {
+    public int compareTo(State state) {
         throw new UnsupportedOperationException();
     }
 }

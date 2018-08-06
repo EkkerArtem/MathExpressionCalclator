@@ -40,7 +40,7 @@ public class OpenParenthesis implements State {
     }
 
     @Override
-    public int compareTo(State o) {
-        return Integer.compare(priority, o.getPriority());
+    public int compareTo(State state) {
+        return Integer.compare(priority, state.getPriority());
     }
 }

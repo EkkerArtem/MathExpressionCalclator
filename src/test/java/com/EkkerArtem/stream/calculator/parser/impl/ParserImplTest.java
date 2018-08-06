@@ -13,7 +13,7 @@ public class ParserImplTest {
     private Parser parser = new ParserImpl();
 
     @Test
-    void simpleParsingTest(){
+    void simpleParsingTest() {
         parser.addOperator(new Addition());
         parser.setInput("31+21");
         assertEquals("31", parser.nextToken());
@@ -23,7 +23,7 @@ public class ParserImplTest {
     }
 
     @Test
-    void complexParsingTest(){
+    void complexParsingTest() {
         parser.addOperator(new Addition());
         parser.addOperator(new Subtraction());
         parser.addOperator(new Division());
@@ -42,7 +42,7 @@ public class ParserImplTest {
     }
 
     @Test
-    void invalidMathematicalExpressionTest(){
+    void invalidMathematicalExpressionTest() {
         parser.addOperator(new Addition());
         assertThrows(NullPointerException.class, () -> parser.nextToken());
         parser.setInput("4/2");

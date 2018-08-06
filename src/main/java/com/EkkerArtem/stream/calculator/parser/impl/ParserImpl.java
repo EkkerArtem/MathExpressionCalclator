@@ -20,12 +20,17 @@ public class ParserImpl implements Parser {
      */
     private int currentPosition = 0;
 
+    /**
+     * Adds support of new operand
+     *
+     * @param operand
+     */
     @Override
     public void addOperator(State operand) {
-        if(operand == null){
+        if (operand == null) {
             throw new NullPointerException("Given operand is empty");
         }
-        if(Strings.isNullOrEmpty(operand.getStateName())){
+        if (Strings.isNullOrEmpty(operand.getStateName())) {
             throw new IllegalArgumentException("Operand name is empty or null");
         }
 
@@ -35,11 +40,11 @@ public class ParserImpl implements Parser {
     /**
      * Validates input string
      */
-    private void validateInput(String input){
-        if(input == null){
+    private void validateInput(String input) {
+        if (input == null) {
             throw new NullPointerException("Input is null. Set input string before search");
         }
-        if(input.equals("")){
+        if (input.equals("")) {
             throw new IllegalArgumentException("Input string is empty");
         }
     }
@@ -51,6 +56,9 @@ public class ParserImpl implements Parser {
         this.currentPosition = 0;
     }
 
+    /**
+     * @return true if nextTokenExists or false if not
+     */
     @Override
     public boolean hasNext() {
         return currentPosition < input.length();
@@ -59,7 +67,7 @@ public class ParserImpl implements Parser {
     /**
      * @return string representation of found Integer.
      */
-    private String getNumber(){
+    private String getNumber() {
         final StringBuilder resultSB = new StringBuilder();
 
         char currentChar = input.charAt(currentPosition);
@@ -70,7 +78,7 @@ public class ParserImpl implements Parser {
                 currentPosition += 1;
                 currentChar = input.charAt(currentPosition);
             } while (Character.isDigit(currentChar));
-        }catch (StringIndexOutOfBoundsException e){
+        } catch (StringIndexOutOfBoundsException e) {
             return resultSB.toString();
         }
 
@@ -80,28 +88,31 @@ public class ParserImpl implements Parser {
     /**
      * @return State name of found operation.
      */
-    private String getOperandString(){
+    private String getOperandString() {
         String curResult;
         Character currentChar;
 
         int counter = currentPosition;
-        do{
+        do {
             currentChar = input.charAt(counter);
             curResult = graph.searchState(currentChar);
             counter++;
-        }while (curResult == null);
+        } while (curResult == null);
 
         currentPosition = currentPosition + curResult.length();
 
         return curResult;
     }
 
+    /**
+     * @return next token in the input string.
+     */
     @Override
     public String nextToken() {
         validateInput(input);
 
         char currentChar = input.charAt(currentPosition);
-        if(Character.isDigit(currentChar)){
+        if (Character.isDigit(currentChar)) {
             return getNumber();
         }
 

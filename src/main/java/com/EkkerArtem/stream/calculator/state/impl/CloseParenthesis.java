@@ -1,6 +1,5 @@
 package com.EkkerArtem.stream.calculator.state.impl;
 
-import com.EkkerArtem.stream.calculator.IsValid;
 import com.EkkerArtem.stream.calculator.state.State;
 
 public class CloseParenthesis implements State {
@@ -30,11 +29,11 @@ public class CloseParenthesis implements State {
 
     @Override
     public State getNextState(String expr) {
-        switch (expr){
-            case "+":{
+        switch (expr) {
+            case "+": {
                 return new Addition();
             }
-            case "-":{
+            case "-": {
                 return new Subtraction();
             }
             case "*": {
@@ -46,20 +45,14 @@ public class CloseParenthesis implements State {
             case ")": {
                 return new CloseParenthesis();
             }
-            default:{
+            default: {
                 throw new IllegalArgumentException("Invalid state \'" + expr + "\' after close Parenthesis");
             }
         }
     }
-//        if(IsValid.isCloseParentheses(expr)){
-//            return new CloseParenthesis();
-//        }
-
-//    }
-
 
     @Override
-    public int compareTo(State o) {
-        return Integer.compare(priority, o.getPriority());
+    public int compareTo(State state) {
+        return Integer.compare(priority, state.getPriority());
     }
 }
