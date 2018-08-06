@@ -16,9 +16,9 @@ public class ParserImplTest {
     void simpleParsingTest() {
         parser.addOperator(new Addition());
         parser.setInput("31+21");
-        assertEquals("31", parser.nextToken());
-        assertEquals("+", parser.nextToken());
-        assertEquals("21", parser.nextToken());
+        assertEquals("31", parser.nextSign());
+        assertEquals("+", parser.nextSign());
+        assertEquals("21", parser.nextSign());
         assertFalse(parser.hasNext());
     }
 
@@ -29,25 +29,25 @@ public class ParserImplTest {
         parser.addOperator(new Division());
         parser.addOperator(new Multiplication());
         parser.setInput("1+23-42/2*3");
-        assertEquals("1", parser.nextToken());
-        assertEquals("+", parser.nextToken());
-        assertEquals("23", parser.nextToken());
-        assertEquals("-", parser.nextToken());
-        assertEquals("42", parser.nextToken());
-        assertEquals("/", parser.nextToken());
-        assertEquals("2", parser.nextToken());
-        assertEquals("*", parser.nextToken());
-        assertEquals("3", parser.nextToken());
+        assertEquals("1", parser.nextSign());
+        assertEquals("+", parser.nextSign());
+        assertEquals("23", parser.nextSign());
+        assertEquals("-", parser.nextSign());
+        assertEquals("42", parser.nextSign());
+        assertEquals("/", parser.nextSign());
+        assertEquals("2", parser.nextSign());
+        assertEquals("*", parser.nextSign());
+        assertEquals("3", parser.nextSign());
         assertFalse(parser.hasNext());
     }
 
     @Test
     void invalidMathematicalExpressionTest() {
         parser.addOperator(new Addition());
-        assertThrows(NullPointerException.class, () -> parser.nextToken());
+        assertThrows(NullPointerException.class, () -> parser.nextSign());
         parser.setInput("4/2");
-        parser.nextToken();
-        assertThrows(IllegalArgumentException.class, () -> parser.nextToken());
+        parser.nextSign();
+        assertThrows(IllegalArgumentException.class, () -> parser.nextSign());
 
         assertThrows(IllegalArgumentException.class, () -> parser.setInput(""));
     }

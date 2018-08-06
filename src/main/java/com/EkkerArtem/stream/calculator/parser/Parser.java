@@ -21,7 +21,7 @@ public interface Parser {
     boolean hasNext();
 
     /**
-     * @return next token in the input string.
+     * @return next sign in the input string.
      */
-    String nextToken();
+    String nextSign();
 }

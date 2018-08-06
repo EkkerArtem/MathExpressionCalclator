@@ -31,9 +31,9 @@ public class OpenParenthesis implements State {
 
     @Override
     public State getNextState(String expr) {
-        if(NumberUtils.isNumber(expr)){
+        if (NumberUtils.isNumber(expr)) {
             return new NumberState();
-        }else if(IsValid.isOpenParentheses(expr)){
+        } else if (IsValid.isOpenParentheses(expr)) {
             return new OpenParenthesis();
         }
         throw new IllegalArgumentException("Invalid state \'" + expr + "\' after open Parenthesis");

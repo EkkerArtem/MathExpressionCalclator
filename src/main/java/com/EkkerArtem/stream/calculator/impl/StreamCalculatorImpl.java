@@ -78,7 +78,7 @@ public class StreamCalculatorImpl implements StreamCalculator {
     }
 
     @Override
-    public Integer interpret(String input) {
+    public Integer doCalculate(String input) {
         operatorsStack = new Stack<>();
         operandsStack = new Stack<>();
         parenthesesStack = new Stack<>();
@@ -86,7 +86,7 @@ public class StreamCalculatorImpl implements StreamCalculator {
 
         parser.setInput(input);
         while (parser.hasNext()) {
-            String token = parser.nextToken();
+            String token = parser.nextSign();
             if (NumberUtils.isNumber(token)) {
                 currentState = currentState.getNextState(token);
                 operandsStack.push(Integer.parseInt(token));

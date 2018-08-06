@@ -26,7 +26,7 @@ public class Initial implements State {
 
     @Override
     public State getNextState(String expr) {
-        if(NumberUtils.isNumber(expr)){
+        if (NumberUtils.isNumber(expr)) {
             return new NumberState();
         }
         throw new IllegalArgumentException("Invalid state \'" + expr + "\' after initial state");

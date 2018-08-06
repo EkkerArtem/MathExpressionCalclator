@@ -40,7 +40,7 @@ public class ParserImpl implements Parser {
     /**
      * Validates input string
      */
-    private void validateInput(String input) {
+    private void inputValidation(String input) {
         if (input == null) {
             throw new NullPointerException("Input is null. Set input string before search");
         }
@@ -51,7 +51,7 @@ public class ParserImpl implements Parser {
 
     @Override
     public void setInput(String input) {
-        validateInput(input);
+        inputValidation(input);
         this.input = input;
         this.currentPosition = 0;
     }
@@ -89,27 +89,27 @@ public class ParserImpl implements Parser {
      * @return State name of found operation.
      */
     private String getOperandString() {
-        String curResult;
-        Character currentChar;
+        String currentResult;
+        Character currentChararacter;
 
         int counter = currentPosition;
         do {
-            currentChar = input.charAt(counter);
-            curResult = graph.searchState(currentChar);
+            currentChararacter = input.charAt(counter);
+            currentResult = graph.searchState(currentChararacter);
             counter++;
-        } while (curResult == null);
+        } while (currentResult == null);
 
-        currentPosition = currentPosition + curResult.length();
+        currentPosition = currentPosition + currentResult.length();
 
-        return curResult;
+        return currentResult;
     }
 
     /**
      * @return next token in the input string.
      */
     @Override
-    public String nextToken() {
-        validateInput(input);
+    public String nextSign() {
+        inputValidation(input);
 
         char currentChar = input.charAt(currentPosition);
         if (Character.isDigit(currentChar)) {
