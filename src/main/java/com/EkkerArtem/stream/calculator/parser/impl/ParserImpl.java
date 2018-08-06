@@ -10,7 +10,7 @@ public class ParserImpl implements Parser {
     /**
      * Stores all operations and determinate if operation is supported.
      */
-    private Tree graph = new TreeImpl();
+    private final Tree graph = new TreeImpl();
     /**
      * String to parse.
      */

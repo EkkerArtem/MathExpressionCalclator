@@ -26,7 +26,8 @@ public class StreamInterpreterImplTest {
                 Arguments.of("9-3", 6), // subtraction test
                 Arguments.of("4*5", 20), // multiplication test
                 Arguments.of("16/4", 4), // division test
-                Arguments.of("1+8*2-18/4", 13) // complex test
+                Arguments.of("1+8*2-18/4", 13), // complex test
+                Arguments.of("2*(1+4)+1", 11)
         );
     }
 
