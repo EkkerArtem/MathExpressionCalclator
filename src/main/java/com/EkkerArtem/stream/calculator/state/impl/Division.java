@@ -30,10 +30,14 @@ public class Division implements State {
 
     @Override
     public State getNextState(String expr) {
-        if(NumberUtils.isNumber(expr)){
+        if (NumberUtils.isNumber(expr)) {
             return new NumberState();
+        } else if (expr.equals(String.valueOf('('))) {
+            return new CloseParenthesis();
+        } else if (expr.equals(String.valueOf(')'))) {
+            return new OpenParenthesis();
         }
-        throw new IllegalArgumentException("Invalid state \'" + expr + "\' after division state");
+        throw new IllegalArgumentException("Invalid state \'" + expr + "\' after Multiplication state");
     }
 
     @Override

@@ -10,17 +10,17 @@ public class NumberState implements State {
 
     @Override
     public int getArgsAmount() {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public String getStateName() {
-        return null;
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public int getPriority() {
-        return 0;
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -38,6 +38,12 @@ public class NumberState implements State {
             case "/": {
                 return new Division();
             }
+            case "(": {
+                return new OpenParenthesis();
+            }
+            case ")": {
+                return new CloseParenthesis();
+            }
             default:{
                 throw new IllegalArgumentException("Invalid state \'" + expr + "\' after number state");
             }
@@ -46,6 +52,6 @@ public class NumberState implements State {
 
     @Override
     public int compareTo(State o) {
-        return Integer.compare(getPriority(), o.getPriority());
+        throw new UnsupportedOperationException();
     }
 }

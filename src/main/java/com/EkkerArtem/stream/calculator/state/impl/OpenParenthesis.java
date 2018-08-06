@@ -1,6 +1,8 @@
 package com.EkkerArtem.stream.calculator.state.impl;
 
+import com.EkkerArtem.stream.calculator.IsValid;
 import com.EkkerArtem.stream.calculator.state.State;
+import org.apache.commons.lang3.math.NumberUtils;
 
 public class OpenParenthesis implements State {
 
@@ -29,11 +31,16 @@ public class OpenParenthesis implements State {
 
     @Override
     public State getNextState(String expr) {
-        return null;
+        if(NumberUtils.isNumber(expr)){
+            return new NumberState();
+        }else if(IsValid.isOpenParentheses(expr)){
+            return new OpenParenthesis();
+        }
+        throw new IllegalArgumentException("Invalid state \'" + expr + "\' after open Parenthesis");
     }
 
     @Override
     public int compareTo(State o) {
-        return 0;
+        return Integer.compare(priority, o.getPriority());
     }
 }
