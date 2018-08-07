@@ -1,5 +1,8 @@
 package com.EkkerArtem.stream.calculator.finiteStateMachine;
 
+/**
+ * The enumeration of all states.
+ */
 public enum State {
-BINNARYOPERATION, INITIAL, NUMBER, OPENPARENTHESIS, CLOSEPARENTHESIS, FINALSTATE
+    BINARY_OPERATION, INITIAL, NUMBER, OPEN_PARENTHESIS, CLOSE_PARENTHESIS
 }

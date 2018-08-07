@@ -35,7 +35,7 @@ public class StreamInterpreterImplTest {
     @ParameterizedTest
     @MethodSource("validMathematicalExpressionProvider")
     void validMathematicalExpressionProvider(String input, Integer expected) {
-        assertEquals(expected, interpreter.doCalculate(input));
+        assertEquals(expected, interpreter.Calculate(input));
     }
 
     private static Stream<Arguments> invalidMathematicalExpressionTest() {
@@ -50,12 +50,12 @@ public class StreamInterpreterImplTest {
     @ParameterizedTest
     @MethodSource("invalidMathematicalExpressionTest")
     void invalidMathematicalExpressionTest(String input) {
-        assertThrows(IllegalArgumentException.class, () -> interpreter.doCalculate(input));
+        assertThrows(IllegalArgumentException.class, () -> interpreter.Calculate(input));
     }
 
     @Test
     void nullCheck() {
-        assertThrows(NullPointerException.class, () -> interpreter.doCalculate(null));
+        assertThrows(NullPointerException.class, () -> interpreter.Calculate(null));
     }
 
 }

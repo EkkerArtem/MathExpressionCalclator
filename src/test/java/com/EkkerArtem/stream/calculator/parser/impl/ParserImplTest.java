@@ -40,7 +40,7 @@ public class ParserImplTest {
     void invalidMathematicalExpressionTest() {
         parser.addOperator("+");
         assertThrows(NullPointerException.class, () -> parser.nextSign());
-        parser.setInput("4/2");
+        parser.setInput("4.2");
         parser.nextSign();
         assertThrows(IllegalArgumentException.class, () -> parser.nextSign());
 
