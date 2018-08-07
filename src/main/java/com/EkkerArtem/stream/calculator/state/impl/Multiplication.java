@@ -1,20 +1,15 @@
 package com.EkkerArtem.stream.calculator.state.impl;
 
-import com.EkkerArtem.stream.calculator.state.State;
+import com.EkkerArtem.stream.calculator.state.Operation;
 
-public class Multiplication extends BinaryOperation {
+public class Multiplication implements Operation {
     private final int priority = 3;
     private static final int argumentsAmount = 2;
-    private String tokenName = "*";
+
 
     @Override
     public int getArgsAmount() {
         return argumentsAmount;
-    }
-
-    @Override
-    public String getStateName() {
-        return tokenName;
     }
 
     /**
@@ -34,7 +29,7 @@ public class Multiplication extends BinaryOperation {
     }
 
     @Override
-    public int compareTo(State state) {
-        return Integer.compare(priority, state.getPriority());
+    public int compareTo(Operation operation) {
+        return Integer.compare(priority, operation.getPriority());
     }
 }

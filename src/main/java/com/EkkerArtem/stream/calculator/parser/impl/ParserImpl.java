@@ -3,7 +3,6 @@ package com.EkkerArtem.stream.calculator.parser.impl;
 import com.EkkerArtem.stream.calculator.parser.tree.Tree;
 import com.EkkerArtem.stream.calculator.parser.tree.TreeImpl;
 import com.EkkerArtem.stream.calculator.parser.Parser;
-import com.EkkerArtem.stream.calculator.state.State;
 import com.google.common.base.Strings;
 
 public class ParserImpl implements Parser {
@@ -11,6 +10,12 @@ public class ParserImpl implements Parser {
      * Stores all operations and determinate if operation is supported.
      */
     private final Tree graph = new TreeImpl();
+
+    @Override
+    public String getInput() {
+        return input;
+    }
+
     /**
      * String to parse.
      */
@@ -20,17 +25,23 @@ public class ParserImpl implements Parser {
      */
     private int currentPosition = 0;
 
+    {
+        addOperator("+");
+        addOperator("-");
+        addOperator("/");
+        addOperator("*");
+        addOperator("(");
+        addOperator(")");
+    }
+
     /**
      * Adds support of new operand
      *
      * @param operand
      */
     @Override
-    public void addOperator(State operand) {
-        if (operand == null) {
-            throw new NullPointerException("Given operand is empty");
-        }
-        if (Strings.isNullOrEmpty(operand.getStateName())) {
+    public void addOperator(String operand) {
+        if (Strings.isNullOrEmpty(operand)) {
             throw new IllegalArgumentException("Operand name is empty or null");
         }
 

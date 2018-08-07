@@ -22,12 +22,13 @@ public class StreamInterpreterImplTest {
 
     private static Stream<Arguments> validMathematicalExpressionProvider() {
         return Stream.of(
-                Arguments.of("2+2", 4), // addition test
+                Arguments.of("6+2", 8), // addition test
                 Arguments.of("9-3", 6), // subtraction test
                 Arguments.of("4*5", 20), // multiplication test
                 Arguments.of("16/4", 4), // division test
                 Arguments.of("1+8*2-18/4", 13), // complex test
-                Arguments.of("2*(3*4)", 24) //parenthesis test
+                Arguments.of("2*(3*4)", 24), //parenthesis test
+                Arguments.of("2*(21/(3+4))",6)  //parentheses test
         );
     }
 

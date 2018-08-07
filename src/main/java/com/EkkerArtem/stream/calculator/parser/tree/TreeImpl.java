@@ -1,6 +1,6 @@
 package com.EkkerArtem.stream.calculator.parser.tree;
 
-import com.EkkerArtem.stream.calculator.state.State;
+import com.EkkerArtem.stream.calculator.state.Operation;
 
 import java.util.LinkedList;
 
@@ -23,26 +23,26 @@ public class TreeImpl implements Tree {
     private Node currentNode = rootNode;
 
     /**
-     * Wraps state into a node
+     * Wraps operation into a node
      *
-     * @param state state to wrap
-     * @return Node which contains state
+     * @param operation operation to wrap
+     * @return Node which contains operation
      */
-    private Node wrapState(State state) {
+    private Node wrapState(String operation) {
         Node node = new Node();
-        node.setSate(state);
+        node.setSate(operation);
         return node;
     }
 
     /**
-     * Adds state to the tree.
+     * Adds operation to the tree.
      *
-     * @param state state to add.
+     * @param operation operation to add.
      */
     @Override
-    public void addState(State state) {
-        char[] nameLetters = state.getStateName().toCharArray();
-        Node node = wrapState(state);
+    public void addState(String operation) {
+        char[] nameLetters = operation.toCharArray();
+        Node node = wrapState(operation);
 
         Node currentNode = rootNode;
 
@@ -93,7 +93,7 @@ public class TreeImpl implements Tree {
      * Should be run multiple times until it finds something or throws an exception.
      *
      * @param character one char from name of desired node.
-     * @return StateName if state exists in the tree. Null if addition search should be done.
+     * @return StateName if operation exists in the tree. Null if addition search should be done.
      * @throws IllegalArgumentException if there is no nodes with given character as letter on the current level and no
      *                                  results were not found before.
      */
@@ -103,7 +103,7 @@ public class TreeImpl implements Tree {
             if (child.getLetter().equals(character)) {
                 traveledNodesLetters.append(character);
                 currentNode = child;
-                if (child.getState() != null && child.getChildNodesList().size() != 0) {
+                if (child.getOperation() != null && child.getChildNodesList().size() != 0) {
                     lastResult = traveledNodesLetters.toString();
                     return null;
                 } else if (child.getChildNodesList().size() == 0) {
@@ -120,13 +120,13 @@ public class TreeImpl implements Tree {
     }
 
     /**
-     * Stores state in the tree. Links to other nodes.
+     * Stores operation in the tree. Links to other nodes.
      */
     private class Node {
         /**
          * Stores State. If null means it is connection node.
          */
-        private State state;
+        private String operation;
         /**
          * Is used to identify the node.
          */
@@ -140,14 +140,14 @@ public class TreeImpl implements Tree {
             this.letter = character;
         }
 
-        void setSate(State state) {
-            this.state = state;
-            String name = this.state.getStateName();
+        void setSate(String operation) {
+            this.operation = operation;
+            String name = this.operation;
             this.letter = name.charAt(name.length() - 1);
         }
 
-        State getState() {
-            return state;
+        String getOperation() {
+            return operation;
         }
 
         Character getLetter() {

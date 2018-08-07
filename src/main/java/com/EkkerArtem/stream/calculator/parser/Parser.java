@@ -1,6 +1,6 @@
 package com.EkkerArtem.stream.calculator.parser;
 
-import com.EkkerArtem.stream.calculator.state.State;
+import com.EkkerArtem.stream.calculator.state.Operation;
 
 /**
  * Returns token by token parsing of input string.
@@ -11,7 +11,7 @@ public interface Parser {
      *
      * @param operand
      */
-    void addOperator(State operand);
+    void addOperator(String operand);
 
     void setInput(String input);
 
@@ -24,4 +24,6 @@ public interface Parser {
      * @return next sign in the input string.
      */
     String nextSign();
+
+    String getInput();
 }

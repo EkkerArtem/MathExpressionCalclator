@@ -1,18 +1,18 @@
 package com.EkkerArtem.stream.calculator.parser.tree;
 
 
-import com.EkkerArtem.stream.calculator.state.State;
+import com.EkkerArtem.stream.calculator.state.Operation;
 
 /**
  * Stores states according to their names.
  */
 public interface Tree {
     /**
-     * Adds state to the tree.
+     * Adds operation to the tree.
      *
-     * @param state state to add.
+     * @param operation operation to add.
      */
-    void addState(State state);
+    void addState(String operation);
 
     /**
      * Searches a node with letter equals to character on the current level of the tree(Child nodes of current Node).

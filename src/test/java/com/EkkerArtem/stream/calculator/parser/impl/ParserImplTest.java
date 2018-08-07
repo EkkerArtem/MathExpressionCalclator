@@ -14,7 +14,6 @@ public class ParserImplTest {
 
     @Test
     void simpleParsingTest() {
-        parser.addOperator(new Addition());
         parser.setInput("31+21");
         assertEquals("31", parser.nextSign());
         assertEquals("+", parser.nextSign());
@@ -24,26 +23,22 @@ public class ParserImplTest {
 
     @Test
     void complexParsingTest() {
-        parser.addOperator(new Addition());
-        parser.addOperator(new Subtraction());
-        parser.addOperator(new Division());
-        parser.addOperator(new Multiplication());
-        parser.setInput("1+23-42/2*3");
-        assertEquals("1", parser.nextSign());
-        assertEquals("+", parser.nextSign());
-        assertEquals("23", parser.nextSign());
+        parser.setInput("5-99/3*3+5");
+        assertEquals("5", parser.nextSign());
         assertEquals("-", parser.nextSign());
-        assertEquals("42", parser.nextSign());
+        assertEquals("99", parser.nextSign());
         assertEquals("/", parser.nextSign());
-        assertEquals("2", parser.nextSign());
+        assertEquals("3", parser.nextSign());
         assertEquals("*", parser.nextSign());
         assertEquals("3", parser.nextSign());
+        assertEquals("+", parser.nextSign());
+        assertEquals("5", parser.nextSign());
         assertFalse(parser.hasNext());
     }
 
     @Test
     void invalidMathematicalExpressionTest() {
-        parser.addOperator(new Addition());
+        parser.addOperator("+");
         assertThrows(NullPointerException.class, () -> parser.nextSign());
         parser.setInput("4/2");
         parser.nextSign();
