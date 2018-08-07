@@ -1,9 +1,6 @@
 package com.EkkerArtem.stream.calculator.finiteStateMachine.fsmimpl;
 
-import com.EkkerArtem.stream.calculator.finiteStateMachine.NextState;
 import com.EkkerArtem.stream.calculator.finiteStateMachine.State;
-import com.EkkerArtem.stream.calculator.finiteStateMachine.Transition;
-import com.EkkerArtem.stream.calculator.state.Operation;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -11,70 +8,55 @@ import java.util.List;
 
 import static com.EkkerArtem.stream.calculator.finiteStateMachine.State.*;
 
-public class ConversionTable implements Transition {
+/**
+ * Class that is storing transition table of states.
+ */
+public class ConversionTable {
     private HashMap<State, List<State>> convTable = new HashMap<>();
 
-    private List<State> BinaryOperationConversationTable() {
+    private List<State> binaryOperationConversationTable() {
         List<State> additionTable = new LinkedList<>();
-        additionTable.add(OPENPARENTHESIS);
-        additionTable.add(CLOSEPARENTHESIS);
+        additionTable.add(OPEN_PARENTHESIS);
+        additionTable.add(CLOSE_PARENTHESIS);
         additionTable.add(NUMBER);
         return additionTable;
     }
 
-    private List<State> InitialStateConversationTable() {
+    private List<State> initialStateConversationTable() {
         List<State> initialStateTable = new LinkedList<>();
         initialStateTable.add(NUMBER);
         return initialStateTable;
     }
 
-    private List<State> OpenParenthesisConversationTable() {
+    private List<State> openParenthesisConversationTable() {
         List<State> openParenthesisTable = new LinkedList<>();
-        openParenthesisTable.add(BINNARYOPERATION);
-        openParenthesisTable.add(CLOSEPARENTHESIS);
+        openParenthesisTable.add(BINARY_OPERATION);
+        openParenthesisTable.add(CLOSE_PARENTHESIS);
         return openParenthesisTable;
     }
 
-    private List<State> CloseParenthesisConversationTable() {
+    private List<State> closeParenthesisConversationTable() {
         List<State> closeParenthesisTable = new LinkedList<>();
         closeParenthesisTable.add(NUMBER);
-        closeParenthesisTable.add(OPENPARENTHESIS);
+        closeParenthesisTable.add(OPEN_PARENTHESIS);
         return closeParenthesisTable;
     }
 
-    private List<State> NumberStateConversationTable() {
+    private List<State> numberStateConversationTable() {
         List<State> numberStateParenthesisTable = new LinkedList<>();
-        numberStateParenthesisTable.add(BINNARYOPERATION);
-        numberStateParenthesisTable.add(OPENPARENTHESIS);
-        numberStateParenthesisTable.add(CLOSEPARENTHESIS);
+        numberStateParenthesisTable.add(BINARY_OPERATION);
+        numberStateParenthesisTable.add(OPEN_PARENTHESIS);
+        numberStateParenthesisTable.add(CLOSE_PARENTHESIS);
         return numberStateParenthesisTable;
     }
 
-    private void converstaionTable() {
-        convTable.put(BINNARYOPERATION, BinaryOperationConversationTable());
-        convTable.put(INITIAL, InitialStateConversationTable());
-        convTable.put(OPENPARENTHESIS, OpenParenthesisConversationTable());
-        convTable.put(CLOSEPARENTHESIS, CloseParenthesisConversationTable());
-        convTable.put(NUMBER, NumberStateConversationTable());
-    }
-
     public ConversionTable() {
-        convTable.put(BINNARYOPERATION, BinaryOperationConversationTable());
-        convTable.put(INITIAL, InitialStateConversationTable());
-        convTable.put(OPENPARENTHESIS, OpenParenthesisConversationTable());
-        convTable.put(CLOSEPARENTHESIS, CloseParenthesisConversationTable());
-        convTable.put(NUMBER, NumberStateConversationTable());
+        convTable.put(BINARY_OPERATION, binaryOperationConversationTable());
+        convTable.put(INITIAL, initialStateConversationTable());
+        convTable.put(OPEN_PARENTHESIS, openParenthesisConversationTable());
+        convTable.put(CLOSE_PARENTHESIS, closeParenthesisConversationTable());
+        convTable.put(NUMBER, numberStateConversationTable());
     }
 
-    @Override
-    public boolean canMove(State current, State next) {
-        if (convTable.containsKey(current)) {
-            List nextStages = convTable.get(current);
-            if (nextStages.contains(next)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
 

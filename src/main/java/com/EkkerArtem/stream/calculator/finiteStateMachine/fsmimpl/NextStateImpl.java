@@ -13,22 +13,22 @@ public class NextStateImpl implements NextState {
         }
         switch (value) {
             case "+": {
-                return State.BINNARYOPERATION;
+                return State.BINARY_OPERATION;
             }
             case "-": {
-                return State.BINNARYOPERATION;
+                return State.BINARY_OPERATION;
             }
             case "*": {
-                return State.BINNARYOPERATION;
+                return State.BINARY_OPERATION;
             }
             case "/": {
-                return State.BINNARYOPERATION;
+                return State.BINARY_OPERATION;
             }
             case "(": {
-                return State.OPENPARENTHESIS;
+                return State.OPEN_PARENTHESIS;
             }
             case ")": {
-                return State.CLOSEPARENTHESIS;
+                return State.CLOSE_PARENTHESIS;
             }
             default: {
                 throw new UnsupportedOperationException();

@@ -6,7 +6,14 @@ import com.EkkerArtem.stream.calculator.state.impl.Division;
 import com.EkkerArtem.stream.calculator.state.impl.Multiplication;
 import com.EkkerArtem.stream.calculator.state.impl.Subtraction;
 
+/**
+ * Return needed binary operation.
+ */
 public class BinaryFactory {
+    /**
+     * @param value the char came from parser.
+     * @return needed binary operation.
+     */
     public Operation operationFactory(String value) {
         switch (value) {
             case "+": {
