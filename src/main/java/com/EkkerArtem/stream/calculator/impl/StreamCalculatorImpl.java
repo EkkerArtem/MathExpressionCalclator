@@ -67,7 +67,7 @@ public class StreamCalculatorImpl extends AbstractStateMachine implements Stream
     }
 
     @Override
-    public Integer Calculate(String input) {
+    public Integer сalculate(String input) {
 
         operatorsStack = new Stack<>();
         operandsStack = new Stack<>();
