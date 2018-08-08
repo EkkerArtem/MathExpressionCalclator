@@ -8,5 +8,5 @@ public interface StreamCalculator {
      * @param input is the input expression.
      * @return the calculated answer.
      */
-    Integer doCalculate(String input);
+    Integer Calculate(String input);
 }
