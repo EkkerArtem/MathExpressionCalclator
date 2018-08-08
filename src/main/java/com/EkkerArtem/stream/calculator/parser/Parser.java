@@ -1,7 +1,5 @@
 package com.EkkerArtem.stream.calculator.parser;
 
-import com.EkkerArtem.stream.calculator.state.Operation;
-
 /**
  * Returns token by token parsing of input string.
  */

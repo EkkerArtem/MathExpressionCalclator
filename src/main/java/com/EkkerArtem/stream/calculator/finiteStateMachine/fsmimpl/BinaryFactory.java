@@ -1,10 +1,10 @@
 package com.EkkerArtem.stream.calculator.finiteStateMachine.fsmimpl;
 
-import com.EkkerArtem.stream.calculator.state.Operation;
-import com.EkkerArtem.stream.calculator.state.impl.Addition;
-import com.EkkerArtem.stream.calculator.state.impl.Division;
-import com.EkkerArtem.stream.calculator.state.impl.Multiplication;
-import com.EkkerArtem.stream.calculator.state.impl.Subtraction;
+import com.EkkerArtem.stream.calculator.operations.Operation;
+import com.EkkerArtem.stream.calculator.operations.impl.Addition;
+import com.EkkerArtem.stream.calculator.operations.impl.Division;
+import com.EkkerArtem.stream.calculator.operations.impl.Multiplication;
+import com.EkkerArtem.stream.calculator.operations.impl.Subtraction;
 
 /**
  * Return needed binary operation.

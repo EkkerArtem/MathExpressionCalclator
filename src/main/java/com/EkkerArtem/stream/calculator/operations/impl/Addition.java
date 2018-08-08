@@ -1,26 +1,19 @@
-package com.EkkerArtem.stream.calculator.state.impl;
+package com.EkkerArtem.stream.calculator.operations.impl;
 
-import com.EkkerArtem.stream.calculator.state.Operation;
+import com.EkkerArtem.stream.calculator.operations.Operation;
 
-public class Multiplication implements Operation {
-    private final int priority = 3;
+public class Addition implements Operation {
+    private static final int priority = 4;
     private static final int argumentsAmount = 2;
-
 
     @Override
     public int getArgsAmount() {
         return argumentsAmount;
     }
 
-    /**
-     * Performs an binary state with two numbers.
-     *
-     * @param args array of arguments
-     * @return result of multiplication between two numbers
-     */
     @Override
     public int performOperation(Integer... args) {
-        return args[0] * args[1];
+        return args[0] + args[1];
     }
 
     @Override

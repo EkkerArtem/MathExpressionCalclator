@@ -7,7 +7,7 @@ import com.EkkerArtem.stream.calculator.finiteStateMachine.fsmimpl.BinaryFactory
 import com.EkkerArtem.stream.calculator.finiteStateMachine.fsmimpl.ConversionTable;
 import com.EkkerArtem.stream.calculator.finiteStateMachine.fsmimpl.NextStateImpl;
 import com.EkkerArtem.stream.calculator.parser.impl.ParserImpl;
-import com.EkkerArtem.stream.calculator.state.Operation;
+import com.EkkerArtem.stream.calculator.operations.Operation;
 
 import java.util.Stack;
 
@@ -67,7 +67,7 @@ public class StreamCalculatorImpl extends AbstractStateMachine implements Stream
     }
 
     @Override
-    public Integer сalculate(String input) {
+    public Integer calculate(String input) {
 
         operatorsStack = new Stack<>();
         operandsStack = new Stack<>();

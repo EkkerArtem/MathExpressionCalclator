@@ -24,7 +24,7 @@ public abstract class AbstractStateMachine {
     }
 
     /**
-     * Defiance behaviour of calculator depending on current state of state machine.
+     * Defiance behaviour of calculator depending on current operations of operations machine.
      * @param sign sores the current sign of input string.
      */
     protected abstract void performOperation(String sign);

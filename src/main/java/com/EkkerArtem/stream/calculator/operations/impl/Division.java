@@ -1,6 +1,6 @@
-package com.EkkerArtem.stream.calculator.state.impl;
+package com.EkkerArtem.stream.calculator.operations.impl;
 
-import com.EkkerArtem.stream.calculator.state.Operation;
+import com.EkkerArtem.stream.calculator.operations.Operation;
 
 public class Division implements Operation {
     private final int priority = 3;
@@ -12,7 +12,7 @@ public class Division implements Operation {
     }
 
     /**
-     * Performs an binary state with two numbers.
+     * Performs an binary operations with two numbers.
      *
      * @param args array of arguments
      * @return result of division between two numbers

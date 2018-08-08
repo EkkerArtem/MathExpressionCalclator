@@ -1,10 +1,11 @@
-package com.EkkerArtem.stream.calculator.state.impl;
+package com.EkkerArtem.stream.calculator.operations.impl;
 
-import com.EkkerArtem.stream.calculator.state.Operation;
+import com.EkkerArtem.stream.calculator.operations.Operation;
 
-public class Subtraction implements Operation {
-    private final int priority = 4;
+public class Multiplication implements Operation {
+    private final int priority = 3;
     private static final int argumentsAmount = 2;
+
 
     @Override
     public int getArgsAmount() {
@@ -12,14 +13,14 @@ public class Subtraction implements Operation {
     }
 
     /**
-     * Performs an binary state with two numbers.
+     * Performs an binary operations with two numbers.
      *
      * @param args array of arguments
-     * @return result of subtraction between two numbers
+     * @return result of multiplication between two numbers
      */
     @Override
     public int performOperation(Integer... args) {
-        return args[0] - args[1];
+        return args[0] * args[1];
     }
 
     @Override
@@ -32,4 +33,3 @@ public class Subtraction implements Operation {
         return Integer.compare(priority, operation.getPriority());
     }
 }
-

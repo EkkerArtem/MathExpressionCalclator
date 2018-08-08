@@ -1,7 +1,5 @@
 package com.EkkerArtem.stream.calculator.parser.tree;
 
-import com.EkkerArtem.stream.calculator.state.Operation;
-
 import java.util.LinkedList;
 
 public class TreeImpl implements Tree {

@@ -1,4 +1,4 @@
-package com.EkkerArtem.stream.calculator.state;
+package com.EkkerArtem.stream.calculator.operations;
 
 
 /**
@@ -6,7 +6,7 @@ package com.EkkerArtem.stream.calculator.state;
  */
 public interface Operation extends Comparable<Operation> {
     /**
-     * Performs an binary state with two numbers.
+     * Performs an binary operations with two numbers.
      *
      * @param args array of arguments
      * @return result of operations between two numbers
@@ -19,7 +19,7 @@ public interface Operation extends Comparable<Operation> {
     int getArgsAmount();
 
     /**
-     * @return priority of the state
+     * @return priority of the operations
      */
     int getPriority();
 

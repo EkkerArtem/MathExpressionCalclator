@@ -1,7 +1,6 @@
 package com.EkkerArtem.stream.calculator.parser.impl;
 
 import com.EkkerArtem.stream.calculator.parser.Parser;
-import com.EkkerArtem.stream.calculator.state.impl.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

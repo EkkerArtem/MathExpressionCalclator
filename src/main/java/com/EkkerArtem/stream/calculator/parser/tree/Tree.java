@@ -1,8 +1,6 @@
 package com.EkkerArtem.stream.calculator.parser.tree;
 
 
-import com.EkkerArtem.stream.calculator.state.Operation;
-
 /**
  * Stores states according to their names.
  */
@@ -19,7 +17,7 @@ public interface Tree {
      * Should be run multiple times until it finds something or throws an exception.
      *
      * @param character one char from name of desired node.
-     * @return StateName if state exists in the tree. Null if addition search should be done.
+     * @return StateName if operations exists in the tree. Null if addition search should be done.
      * @throws IllegalArgumentException if there is no nodes with given character as letter on the current level and no
      *                                  results were not found before.
      */
