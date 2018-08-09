@@ -8,5 +8,5 @@ public interface StreamCalculator {
     /**
      * @return the calculated answer.
      */
-    Integer calculate();
+    double calculate();
 }

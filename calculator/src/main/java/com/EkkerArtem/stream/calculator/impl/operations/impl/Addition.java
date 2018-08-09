@@ -12,7 +12,7 @@ public class Addition implements Operation {
     }
 
     @Override
-    public int performOperation(Integer... args) {
+    public double performOperation(double... args) {
         return args[0] + args[1];
     }
 

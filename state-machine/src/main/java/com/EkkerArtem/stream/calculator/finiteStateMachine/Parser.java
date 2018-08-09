@@ -20,6 +20,4 @@ public interface Parser {
      * @return next sign in the input string.
      */
     String nextSign();
-
-    String getInput();
 }

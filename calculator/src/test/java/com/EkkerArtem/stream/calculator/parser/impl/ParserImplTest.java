@@ -37,7 +37,7 @@ public class ParserImplTest {
 
     @Test
     void invalidMathematicalExpressionTest() {
-        Parser parser = new ParserImpl("4.2");
+        Parser parser = new ParserImpl("4^2");
         parser.addOperator("+");
         parser.nextSign();
         assertThrows(IllegalArgumentException.class, () -> parser.nextSign());

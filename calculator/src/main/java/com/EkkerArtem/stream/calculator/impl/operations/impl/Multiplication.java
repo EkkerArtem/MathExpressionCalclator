@@ -19,7 +19,7 @@ public class Multiplication implements Operation {
      * @return result of multiplication between two numbers
      */
     @Override
-    public int performOperation(Integer... args) {
+    public double performOperation(double... args) {
         return args[0] * args[1];
     }
 

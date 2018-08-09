@@ -8,10 +8,9 @@ public interface Operation extends Comparable<Operation> {
     /**
      * Performs an binary operations with two numbers.
      *
-     * @param args array of arguments
      * @return result of operations between two numbers
      */
-    int performOperation(Integer... args);
+    double performOperation(double... args);
 
     /**
      * @return amount of arguments necessary to perform an operation

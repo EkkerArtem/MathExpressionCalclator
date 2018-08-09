@@ -2,21 +2,21 @@ package com.EkkerArtem.stream.calculator.impl;
 
 import com.EkkerArtem.stream.calculator.StreamCalculator;
 import com.EkkerArtem.stream.calculator.finiteStateMachine.AbstractStateMachine;
-import com.EkkerArtem.stream.calculator.finiteStateMachine.State;
-import com.EkkerArtem.stream.calculator.impl.operations.impl.BinaryFactory;
-import com.EkkerArtem.stream.calculator.finiteStateMachine.fsmimpl.NextStateImpl;
 import com.EkkerArtem.stream.calculator.finiteStateMachine.Parser;
+import com.EkkerArtem.stream.calculator.impl.state.StateImpl;
+import com.EkkerArtem.stream.calculator.impl.state.NextStateImpl;
 import com.EkkerArtem.stream.calculator.impl.operations.Operation;
+import com.EkkerArtem.stream.calculator.impl.operations.impl.BinaryFactory;
 
 import java.util.ArrayDeque;
 
 public class StreamCalculatorImpl extends AbstractStateMachine implements StreamCalculator {
     /**
-     * to validate switch between states
+     * to validate switch between states.
      */
     private Operation currentOperation;
     private ArrayDeque<Operation> operatorsStack;
-    private ArrayDeque<Integer> operandsStack;
+    private ArrayDeque<Double> operandsStack;
     private ArrayDeque<Integer> parenthesesStack;
     private BinaryFactory binaryFactory = new BinaryFactory();
 
@@ -30,7 +30,7 @@ public class StreamCalculatorImpl extends AbstractStateMachine implements Stream
     private void cascadeOperations() {
         while (!operatorsStack.isEmpty() && (parenthesesStack.isEmpty() || parenthesesStack.peek() < operandsStack.size() - 1)) {
             Operation stackOperation = operatorsStack.peek();
-            Integer[] args = new Integer[stackOperation.getArgsAmount()];
+            double[] args = new double[stackOperation.getArgsAmount()];
             for (int i = stackOperation.getArgsAmount() - 1; i >= 0; i--) {
                 args[i] = operandsStack.pop();
             }
@@ -63,8 +63,9 @@ public class StreamCalculatorImpl extends AbstractStateMachine implements Stream
         }
     }
 
+
     @Override
-    public Integer calculate() {
+    public double calculate() {
 
         operatorsStack = new ArrayDeque<>();
         operandsStack = new ArrayDeque<>();
@@ -83,13 +84,13 @@ public class StreamCalculatorImpl extends AbstractStateMachine implements Stream
     @Override
     protected void performOperation(String sign) {
         NextStateImpl nState = new NextStateImpl();
-        if (nState.getNextState(sign).equals(State.NUMBER)) {
-            operandsStack.push(Integer.parseInt(sign));
-        } else if (nState.getNextState(sign).equals(State.BINARY_OPERATION)) {
+        if (nState.getNextState(sign).equals(StateImpl.NUMBER)) {
+            operandsStack.push(Double.parseDouble(sign));
+        } else if (nState.getNextState(sign).equals(StateImpl.BINARY_OPERATION)) {
             prioritizeOperation(sign);
-        } else if (nState.getNextState(sign).equals(State.OPEN_PARENTHESIS)) {
+        } else if (nState.getNextState(sign).equals(StateImpl.OPEN_PARENTHESIS)) {
             parenthesesStack.push(operandsStack.size());
-        } else if (nState.getNextState(sign).equals(State.CLOSE_PARENTHESIS)) {
+        } else if (nState.getNextState(sign).equals(StateImpl.CLOSE_PARENTHESIS)) {
             if (parenthesesStack.isEmpty()) {
                 throw new IllegalArgumentException("Parentheses is not opened");
             }

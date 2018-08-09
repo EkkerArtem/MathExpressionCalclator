@@ -11,11 +11,6 @@ public class ParserImpl implements Parser {
      */
     private final Tree graph = new TreeImpl();
 
-    @Override
-    public String getInput() {
-        return input;
-    }
-
     /**
      * String to parse.
      */
@@ -87,7 +82,7 @@ public class ParserImpl implements Parser {
                 resultSB.append(currentChar);
                 currentPosition += 1;
                 currentChar = input.charAt(currentPosition);
-            } while (Character.isDigit(currentChar));
+            } while (Character.isDigit(currentChar) || currentChar == '.');
         } catch (StringIndexOutOfBoundsException e) {
             return resultSB.toString();
         }
@@ -96,7 +91,7 @@ public class ParserImpl implements Parser {
     }
 
     /**
-     * @return State name of found operation.
+     * @return StateImpl name of found operation.
      */
     private String getOperandString() {
         String currentResult;

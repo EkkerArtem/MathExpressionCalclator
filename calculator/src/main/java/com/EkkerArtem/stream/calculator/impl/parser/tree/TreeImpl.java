@@ -122,7 +122,7 @@ public class TreeImpl implements Tree {
      */
     private class Node {
         /**
-         * Stores State. If null means it is connection node.
+         * Stores StateImpl. If null means it is connection node.
          */
         private String operation;
         /**

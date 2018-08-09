@@ -19,18 +19,11 @@ public class StreamInterpreterImplTest {
                 Arguments.of("9-3", 6), // subtraction test
                 Arguments.of("4*5", 20), // multiplication test
                 Arguments.of("16/4", 4), // division test
-                Arguments.of("1+8*2-18/4", 13), // complex test
+                Arguments.of("1+8*2-18/4", 12.5), // complex test
                 Arguments.of("2*(3*4)", 24), //parenthesis test
-                Arguments.of("2*(21/(3+4))",6)  //parentheses test
+                Arguments.of("2*(21/(3+4))", 6), //parentheses test
+                Arguments.of("3/2", 1.5)
         );
-    }
-
-    @ParameterizedTest
-    @MethodSource("validMathematicalExpressionProvider")
-    void validMathematicalExpressionProvider(String input, Integer expected) {
-        ParserImpl parser = new ParserImpl(input);
-        StreamCalculator calculator = new StreamCalculatorImpl(parser);
-        assertEquals(expected, calculator.calculate());
     }
 
     private static Stream<Arguments> invalidMathematicalExpressionTest() {
@@ -40,6 +33,14 @@ public class StreamInterpreterImplTest {
                 Arguments.of("notANumber/15", "Message1"),
                 Arguments.of("5+asdaf3", "Message1")
         );
+    }
+
+    @ParameterizedTest
+    @MethodSource("validMathematicalExpressionProvider")
+    void validMathematicalExpressionProvider(String input, double expected) {
+        ParserImpl parser = new ParserImpl(input);
+        StreamCalculator calculator = new StreamCalculatorImpl(parser);
+        assertEquals(expected, calculator.calculate());
     }
 
     @ParameterizedTest

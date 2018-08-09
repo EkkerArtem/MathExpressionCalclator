@@ -18,7 +18,7 @@ public class Subtraction implements Operation {
      * @return result of subtraction between two numbers
      */
     @Override
-    public int performOperation(Integer... args) {
+    public double performOperation(double... args) {
         return args[0] - args[1];
     }
 

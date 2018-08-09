@@ -17,15 +17,14 @@ public abstract class AbstractStateMachine {
     protected abstract void performOperation(String sign);
 
     public void run() {
-
         String nextStr = parser.nextSign();
 
         performOperation(nextStr);
         while (parser.hasNext()) {
 
-            String s = parser.nextSign();
+            String nextSign = parser.nextSign();
 
-            performOperation(s);
+            performOperation(nextSign);
         }
     }
 }
