@@ -8,16 +8,16 @@ import com.EkkerArtem.stream.calculator.finiteStateMachine.fsmimpl.NextStateImpl
 import com.EkkerArtem.stream.calculator.finiteStateMachine.Parser;
 import com.EkkerArtem.stream.calculator.impl.operations.Operation;
 
-import java.util.Stack;
+import java.util.ArrayDeque;
 
 public class StreamCalculatorImpl extends AbstractStateMachine implements StreamCalculator {
     /**
      * to validate switch between states
      */
     private Operation currentOperation;
-    private Stack<Operation> operatorsStack;
-    private Stack<Integer> operandsStack;
-    private Stack<Integer> parenthesesStack;
+    private ArrayDeque<Operation> operatorsStack;
+    private ArrayDeque<Integer> operandsStack;
+    private ArrayDeque<Integer> parenthesesStack;
     private BinaryFactory binaryFactory = new BinaryFactory();
 
     public StreamCalculatorImpl(Parser parser) {
@@ -28,7 +28,7 @@ public class StreamCalculatorImpl extends AbstractStateMachine implements Stream
      * Processes all stored operations.
      */
     private void cascadeOperations() {
-        while (!operatorsStack.empty() && (parenthesesStack.empty() || parenthesesStack.peek() < operandsStack.size() - 1)) {
+        while (!operatorsStack.isEmpty() && (parenthesesStack.isEmpty() || parenthesesStack.peek() < operandsStack.size() - 1)) {
             Operation stackOperation = operatorsStack.peek();
             Integer[] args = new Integer[stackOperation.getArgsAmount()];
             for (int i = stackOperation.getArgsAmount() - 1; i >= 0; i--) {
@@ -47,7 +47,7 @@ public class StreamCalculatorImpl extends AbstractStateMachine implements Stream
      */
     private void prioritizeOperation(String operationStr) {
         currentOperation = binaryFactory.operationFactory(operationStr);
-        if (!operatorsStack.empty()) {
+        if (!operatorsStack.isEmpty()) {
             Operation stackOperation = operatorsStack.peek();
             if (stackOperation.compareTo(currentOperation) == 0) {
                 cascadeOperations();
@@ -66,13 +66,13 @@ public class StreamCalculatorImpl extends AbstractStateMachine implements Stream
     @Override
     public Integer calculate() {
 
-        operatorsStack = new Stack<>();
-        operandsStack = new Stack<>();
-        parenthesesStack = new Stack<>();
+        operatorsStack = new ArrayDeque<>();
+        operandsStack = new ArrayDeque<>();
+        parenthesesStack = new ArrayDeque<>();
 
         run();
 
-        if (!parenthesesStack.empty()) {
+        if (!parenthesesStack.isEmpty()) {
             throw new IllegalArgumentException("Parenthesis is not closed");
         }
         cascadeOperations();
@@ -90,7 +90,7 @@ public class StreamCalculatorImpl extends AbstractStateMachine implements Stream
         } else if (nState.getNextState(sign).equals(State.OPEN_PARENTHESIS)) {
             parenthesesStack.push(operandsStack.size());
         } else if (nState.getNextState(sign).equals(State.CLOSE_PARENTHESIS)) {
-            if (parenthesesStack.empty()) {
+            if (parenthesesStack.isEmpty()) {
                 throw new IllegalArgumentException("Parentheses is not opened");
             }
             cascadeOperations();
