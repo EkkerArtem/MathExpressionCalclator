@@ -1,4 +1,4 @@
-package com.javaclasses.calculator.impl;
+package com.javaclasses.calculator.impl.conversationtable;
 
 import com.javaclasses.finiteStateMachine.ConversionTable;
 import com.javaclasses.finiteStateMachine.State;

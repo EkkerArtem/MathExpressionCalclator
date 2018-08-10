@@ -1,6 +1,6 @@
 package com.javaclasses.calculator.impl;
 
-import com.javaclasses.calculator.StreamCalculator;
+import com.javaclasses.calculator.MathExpressionCalculator;
 import com.javaclasses.finiteStateMachine.AbstractStateMachine;
 import com.javaclasses.finiteStateMachine.Parser;
 import com.javaclasses.calculator.impl.state.StateImpl;
@@ -10,7 +10,7 @@ import com.javaclasses.calculator.impl.operations.impl.BinaryFactory;
 
 import java.util.ArrayDeque;
 
-public class StreamCalculatorImpl extends AbstractStateMachine implements StreamCalculator {
+public class MathExpressionCalculatorImpl extends AbstractStateMachine implements MathExpressionCalculator {
     /**
      * to validate switch between states.
      */
@@ -20,7 +20,7 @@ public class StreamCalculatorImpl extends AbstractStateMachine implements Stream
     private ArrayDeque<Integer> parenthesesStack;
     private BinaryFactory binaryFactory = new BinaryFactory();
 
-    public StreamCalculatorImpl(Parser parser) {
+    public MathExpressionCalculatorImpl(Parser parser) {
         super(parser);
     }
 

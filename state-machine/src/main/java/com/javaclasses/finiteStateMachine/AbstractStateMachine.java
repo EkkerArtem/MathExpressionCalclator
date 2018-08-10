@@ -18,10 +18,8 @@ public abstract class AbstractStateMachine {
 
     public void run() {
         String nextStr = parser.nextSign();
-
         performOperation(nextStr);
         while (parser.hasNext()) {
-
 
             String nextSign = parser.nextSign();
 

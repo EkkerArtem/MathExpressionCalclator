@@ -3,7 +3,7 @@ package com.javaclasses.calculator;
 /**
  * Returns the result of calculation.
  */
-public interface StreamCalculator {
+public interface MathExpressionCalculator {
 
     /**
      * @return the calculated answer.
