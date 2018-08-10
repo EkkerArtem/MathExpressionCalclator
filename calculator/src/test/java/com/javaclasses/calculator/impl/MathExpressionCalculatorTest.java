@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class MathExpressionCalculatorTest {
 
-    private static Stream<Arguments> validMathematicalExpressionProvider() {
+    private static Stream<Arguments> validMathematicalExpressionTest() {
         return Stream.of(
                 Arguments.of("6+2", 8, "addition test failed"),
                 Arguments.of("9-3", 6, "subtraction test failed"),
@@ -37,8 +37,8 @@ public class MathExpressionCalculatorTest {
     }
 
     @ParameterizedTest
-    @MethodSource("validMathematicalExpressionProvider")
-    void validMathematicalExpressionProvider(String input, double expected) {
+    @MethodSource("validMathematicalExpressionTest")
+    void validMathematicalExpressionTest(String input, double expected) {
         ParserImpl parser = new ParserImpl(input);
         MathExpressionCalculator calculator = new MathExpressionCalculatorImpl(parser);
         assertEquals(expected, calculator.calculate());
