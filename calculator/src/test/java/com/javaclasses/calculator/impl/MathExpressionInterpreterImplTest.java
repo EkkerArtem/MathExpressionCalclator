@@ -22,7 +22,8 @@ public class MathExpressionInterpreterImplTest {
                 Arguments.of("1+8*2-18/4", 12.5, "complex test failed"),
                 Arguments.of("2*(3*4)", 24, "parenthesis test failed"),
                 Arguments.of("2*(21/(3+4))", 6, "parentheses test failed"),
-                Arguments.of("3/2", 1.5, "double values test failed")
+                Arguments.of("3/2", 1.5, "double value return test failed"),
+                Arguments.of("1.5/2", 0.75, "double values input and output test failed")
         );
     }
 
