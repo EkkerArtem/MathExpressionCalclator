@@ -3,7 +3,6 @@ package com.javaclasses.calculator.impl.state;
 import com.javaclasses.calculator.impl.conversationtable.ConversionTableImpl;
 import com.javaclasses.finiteStateMachine.NextState;
 import com.google.common.collect.ImmutableMap;
-import com.javaclasses.finiteStateMachine.State;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.Map;
