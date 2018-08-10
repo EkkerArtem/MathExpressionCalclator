@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MathExpressionInterpreterImplTest {
+public class MathExpressionCalculatorTest {
 
     private static Stream<Arguments> validMathematicalExpressionProvider() {
         return Stream.of(
