@@ -1,12 +1,17 @@
 package com.javaclasses.calculator.impl.state;
 
+import com.javaclasses.calculator.impl.conversationtable.ConversionTableImpl;
 import com.javaclasses.finiteStateMachine.NextState;
 import com.google.common.collect.ImmutableMap;
+import com.javaclasses.finiteStateMachine.State;
 import org.apache.commons.lang3.math.NumberUtils;
 
 import java.util.Map;
 
 public class NextStateImpl implements NextState {
+
+
+    private ConversionTableImpl conversionTable = new ConversionTableImpl();
 
     private static final Map<String, StateImpl> registry =
             ImmutableMap.<String, StateImpl>builder()
@@ -20,13 +25,22 @@ public class NextStateImpl implements NextState {
 
     @Override
     public StateImpl getNextState(String value) {
+        StateImpl currentState;
         if (NumberUtils.isNumber(value)) {
+
             return StateImpl.NUMBER;
         }
-        StateImpl stateImpl = registry.get(value);
-        if (stateImpl == null) {
-            throw new UnsupportedOperationException(value);
+
+        currentState = StateImpl.NUMBER;
+        if (conversionTable.canMove(currentState, registry.get(value))) {
+            StateImpl stateImpl = registry.get(value);
+
+
+            if (stateImpl == null) {
+                throw new UnsupportedOperationException(value);
+            }
+            return stateImpl;
         }
-        return stateImpl;
+        throw new IllegalArgumentException();
     }
 }
