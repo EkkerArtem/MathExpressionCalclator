@@ -12,7 +12,8 @@ public class ParserImpl implements Parser {
     private final Tree graph = new TreeImpl();
 
     /**
-     * String to parse.
+     * String with math expression to parse.
+     * It can be like 1+1 or 2*(1+2/(15/5)-7).
      */
     private final String input;
     /**
@@ -37,9 +38,9 @@ public class ParserImpl implements Parser {
     }
 
     /**
-     * Adds support of new operand
+     * Adds support of new operand.
      *
-     * @param operand
+     * @param operand is the sign of the operand added.
      */
     @Override
     public void addOperator(String operand) {
@@ -50,7 +51,7 @@ public class ParserImpl implements Parser {
     }
 
     /**
-     * Validates input string
+     * Validates input string.
      */
     private static void validateInput(String input) {
         if (input == null) {
@@ -62,7 +63,7 @@ public class ParserImpl implements Parser {
     }
 
     /**
-     * @return true if nextTokenExists or false if not
+     * @return true if nextTokenExists or false if not.
      */
     @Override
     public boolean hasNext() {

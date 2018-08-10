@@ -6,7 +6,7 @@ package com.javaclasses.finiteStateMachine;
 public interface NextState {
     /**
      * @param value is the sign of current operation.
-     * @return the next operations.
+     * @return the next state.
      */
     State getNextState(String value);
 }

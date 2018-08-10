@@ -8,9 +8,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Class that is storing transition table of states.
- */
 public class ConversionTableImpl implements ConversionTable {
     private HashMap<StateImpl, List<StateImpl>> convTable = new HashMap<>();
 

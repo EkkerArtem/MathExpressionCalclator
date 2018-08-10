@@ -1,6 +1,9 @@
 package com.javaclasses.finiteStateMachine;
 
 
+/**
+ * Class that is defiance behaviour of calculator depending on current operations of operations machine.
+ */
 public abstract class AbstractStateMachine {
 
     private final Parser parser;
