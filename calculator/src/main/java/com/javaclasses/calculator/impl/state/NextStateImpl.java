@@ -26,20 +26,20 @@ public class NextStateImpl implements NextState {
     public StateImpl getNextState(String value) {
         StateImpl currentState;
         if (NumberUtils.isNumber(value)) {
-
-            return StateImpl.NUMBER;
+            currentState = StateImpl.NUMBER;
+            return currentState;
         }
 
         currentState = StateImpl.NUMBER;
         if (conversionTable.canMove(currentState, registry.get(value))) {
             StateImpl stateImpl = registry.get(value);
-
+            currentState = stateImpl;
 
             if (stateImpl == null) {
                 throw new UnsupportedOperationException(value);
             }
-            return stateImpl;
+            return currentState;
         }
-        throw new IllegalArgumentException();
+       throw new IllegalArgumentException();
     }
 }
