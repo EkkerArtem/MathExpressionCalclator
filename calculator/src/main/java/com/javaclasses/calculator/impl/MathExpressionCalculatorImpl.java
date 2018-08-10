@@ -11,10 +11,6 @@ import com.javaclasses.calculator.impl.operations.impl.BinaryFactory;
 import java.util.ArrayDeque;
 
 public class MathExpressionCalculatorImpl extends AbstractStateMachine implements MathExpressionCalculator {
-    /**
-     * to validate switch between states.
-     */
-    private Operation currentOperation;
     private ArrayDeque<Operation> operatorsStack;
     private ArrayDeque<Double> operandsStack;
     private ArrayDeque<Integer> parenthesesStack;
@@ -46,7 +42,8 @@ public class MathExpressionCalculatorImpl extends AbstractStateMachine implement
      * @param operationStr string which contains string representation of the operation
      */
     private void prioritizeOperation(String operationStr) {
-        currentOperation = binaryFactory.operationFactory(operationStr);
+
+        Operation currentOperation = binaryFactory.operationFactory(operationStr);
         if (!operatorsStack.isEmpty()) {
             Operation stackOperation = operatorsStack.peek();
             if (stackOperation.compareTo(currentOperation) == 0) {
